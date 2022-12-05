@@ -1,26 +1,32 @@
-﻿int[] GetArray(int m) 
+﻿double[,] GetArray(int m, int n) 
 {
-    int[] result = new int[m];
+    double[,] result = new double[m, n];
 
     for (int i = 0; i < m; i++)
     {
-        Console.Write("Введите цисло: ");
-        result[i] = int.Parse(Console.ReadLine()!);
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = Math.Round(new Random().NextDouble(), 2);
+        }
     }
-
     return result;
 }
 
-void PrintArray(int[] inArray)
+void PrintArray(double[,] inArray)
 {
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
-         Console.Write($"{inArray[i]}\t ");
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]}\t ");
+        }
+        Console.WriteLine();
     }
 }
-
 Console.Clear();
-Console.Write("Введите кол-во элементов: ");
+Console.Write("Введите кол-во строк массива: ");
 int rows = int.Parse(Console.ReadLine()!);
-int[] array = GetArray(rows);
+Console.Write("Введите кол-во столбцов массива: ");
+int cols = int.Parse(Console.ReadLine()!);
+double[,] array = GetArray(rows, cols);
 PrintArray(array);
