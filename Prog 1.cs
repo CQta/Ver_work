@@ -1,32 +1,38 @@
-﻿double[,] GetArray(int m, int n) 
+﻿int[] GetArray(int m) 
 {
-    double[,] result = new double[m, n];
+    int[] result = new int[m];
 
     for (int i = 0; i < m; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            result[i, j] = Math.Round(new Random().NextDouble(), 2);
-        }
+        result[i] = new Random().Next(100, 1000);
     }
     return result;
 }
 
-void PrintArray(double[,] inArray)
+void PrintArray(int[] inArray)
 {
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        for (int j = 0; j < inArray.GetLength(1); j++)
-        {
-            Console.Write($"{inArray[i, j]}\t ");
-        }
-        Console.WriteLine();
+        Console.Write(inArray[i] + " ");
     }
+    Console.WriteLine(" ");
+}
+
+void PrintHonNum(int[] inArray)
+{
+    int kol = 0;
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        if(inArray[i] % 2 ==0)
+        {
+            kol++;
+        }
+    }
+    Console.Write(kol);
 }
 Console.Clear();
-Console.Write("Введите кол-во строк массива: ");
+Console.Write("Введите кол-во элементов массива: ");
 int rows = int.Parse(Console.ReadLine()!);
-Console.Write("Введите кол-во столбцов массива: ");
-int cols = int.Parse(Console.ReadLine()!);
-double[,] array = GetArray(rows, cols);
+int[] array = GetArray(rows);
 PrintArray(array);
+PrintHonNum(array);
