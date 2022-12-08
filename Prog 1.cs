@@ -1,38 +1,50 @@
-﻿int[] GetArray(int m) 
+﻿int[,] GetArray(int m, int n) 
 {
-    int[] result = new int[m];
+    int[,] result = new int[m, n];
 
     for (int i = 0; i < m; i++)
     {
-        result[i] = new Random().Next(100, 1000);
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(1, 100);
+        }
     }
+
     return result;
 }
 
-void PrintArray(int[] inArray)
+void PrintArray(int[,] inArray)
 {
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        Console.Write(inArray[i] + " ");
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]}\t ");
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine(" ");
+    Console.WriteLine();
 }
 
-void PrintHonNum(int[] inArray)
+void Sort(int[,] inArray)
 {
-    int kol = 0;
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        if(inArray[i] % 2 ==0)
+        for (int j = 0; j < inArray.GetLength(1)-1; j++)
         {
-            kol++;
+            for (int z = j+1; z < inArray.GetLength(1); z++)
+            {
+                if(inArray[i,z]>inArray[i,j]) (inArray[i,z],inArray[i,j]) = (inArray[i,j],inArray[i,z]);
+            }
         }
     }
-    Console.Write(kol);
+    PrintArray(inArray);
 }
 Console.Clear();
-Console.Write("Введите кол-во элементов массива: ");
+Console.Write("Введите кол-во строк массива: ");
 int rows = int.Parse(Console.ReadLine()!);
-int[] array = GetArray(rows);
+Console.Write("Введите кол-во столбцов массива: ");
+int cols = int.Parse(Console.ReadLine()!);
+int[,] array = GetArray(rows, cols);
 PrintArray(array);
-PrintHonNum(array);
+Sort(array);
