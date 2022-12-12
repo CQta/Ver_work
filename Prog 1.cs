@@ -24,10 +24,7 @@ void PrintEndArray(string[] inArray)
 {  
     
     int buf = 0;
-    for (int i = 0; i < inArray.GetLength(0); i++)
-    {
-        if(inArray[i].Length <= 3) buf++;
-    }
+    for (int i = 0; i < inArray.GetLength(0); i++) if(inArray[i].Length <= 3) buf++;
     string[] EndArray = new string[buf];
     buf = 0;
     for (int i = 0; i < inArray.GetLength(0); i++)
