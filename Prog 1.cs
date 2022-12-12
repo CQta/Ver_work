@@ -1,50 +1,48 @@
-﻿int[,] GetArray(int m, int n) 
+﻿string[] GetArray(int m) 
 {
-    int[,] result = new int[m, n];
+    string[] result = new string[m];
 
     for (int i = 0; i < m; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            result[i, j] = new Random().Next(1, 100);
-        }
+        Console.WriteLine("Введите элемент массива");
+        result[i] = Console.ReadLine()!;
     }
-
     return result;
 }
 
-void PrintArray(int[,] inArray)
+void PrintFullArray(string[] inArray)
 {
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        for (int j = 0; j < inArray.GetLength(1); j++)
-        {
-            Console.Write($"{inArray[i, j]}\t ");
-        }
-        Console.WriteLine();
+        Console.Write($"{inArray[i]}\t ");
     }
-    Console.WriteLine();
+    Console.WriteLine("");
+    Console.WriteLine("");
 }
 
-void Sort(int[,] inArray)
-{
+void PrintEndArray(string[] inArray)
+{  
+    
+    int buf = 0;
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        for (int j = 0; j < inArray.GetLength(1)-1; j++)
+        if(inArray[i].Length <= 3) buf++;
+    }
+    string[] EndArray = new string[buf];
+    buf = 0;
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        if(inArray[i].Length <= 3)
         {
-            for (int z = j+1; z < inArray.GetLength(1); z++)
-            {
-                if(inArray[i,z]>inArray[i,j]) (inArray[i,z],inArray[i,j]) = (inArray[i,j],inArray[i,z]);
-            }
+            EndArray[buf] = inArray[i];
+            buf++;
+            Console.Write($"{inArray[i]}\t ");
         }
     }
-    PrintArray(inArray);
 }
 Console.Clear();
-Console.Write("Введите кол-во строк массива: ");
-int rows = int.Parse(Console.ReadLine()!);
-Console.Write("Введите кол-во столбцов массива: ");
-int cols = int.Parse(Console.ReadLine()!);
-int[,] array = GetArray(rows, cols);
-PrintArray(array);
-Sort(array);
+Console.Write("Введите кол-во элементов массива: ");
+int kol = int.Parse(Console.ReadLine()!);
+string[] array = GetArray(kol);
+PrintFullArray(array);
+PrintEndArray(array);
